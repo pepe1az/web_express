@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f2">
+  <title>По порядку — список дел</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%232e6654'/%3E%3Cpath d='m8 16 5 5 11-12' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/" aria-label="По порядку, главная"><span class="brandmark" aria-hidden="true">✓</span> по порядку<span class="branddot">.</span></a><span class="topnote">Личный список дел</span></header>
+  <main>
+    <section class="intro"><div class="eyebrow">МЕНЬШЕ СУЕТЫ. БОЛЬШЕ СДЕЛАННОГО.</div><h1>Всё начинается<br>с одного дела<span>.</span></h1><p>Запишите важное, двигайтесь в своём темпе<br class="desktop"> и отмечайте маленькие победы.</p></section>
+    <section id="auth-panel" class="auth card" aria-labelledby="auth-title">
+      <div class="small-label">ВАШЕ РАБОЧЕЕ ПРОСТРАНСТВО</div><h2 id="auth-title">Войти в список</h2><p class="muted">Введите токен доступа, чтобы увидеть и изменить свои дела.</p>
+      <form id="auth-form"><label for="token">Токен доступа</label><input id="token" name="token" type="password" autocomplete="off" required placeholder="Введите ваш токен"><button class="primary" id="sign-in" type="submit">Открыть список <span aria-hidden="true">↗</span></button></form>
+      <p class="hint">Токен хранится только до закрытия или обновления страницы.</p>
+    </section>
+    <section id="workspace" hidden>
+      <div class="workspace-grid">
+        <aside>
+          <section class="author card"><span class="small-label">МОЙ ПРОФИЛЬ</span><div class="avatar" aria-hidden="true">КК</div><h2 id="author-name"></h2><p id="author-login" class="muted"></p><button id="logout" class="text-button" type="button">Выйти из списка ↗</button></section>
+          <section class="progress-card"><span class="small-label">ШАГ ЗА ШАГОМ</span><strong id="progress-text">0 из 0</strong><span class="muted">дел выполнено в этой группе</span><progress id="progress" value="0" max="1" aria-label="Выполненные дела"></progress><p>Даже небольшой шаг —<br>уже движение вперёд.</p></section>
+        </aside>
+        <div class="tasks-column">
+          <section class="card composer"><div class="section-heading"><h2>Что в планах?</h2><span class="number-tag">01 — ДОБАВИТЬ</span></div><form id="create-form"><label class="sr-only" for="new-title">Название нового дела</label><div class="compose-row"><input id="new-title" required placeholder="Например, закончить итоговую работу"><button class="primary" type="submit" aria-label="Добавить дело">Добавить <span aria-hidden="true">+</span></button></div><p class="hint">До 200 символов. Новое дело попадёт в выбранную группу.</p></form></section>
+          <section class="card list-card"><div class="section-heading"><h2>Мои дела <span id="total-badge" class="badge">0</span></h2><button id="refresh" class="text-button" type="button">↻ Обновить</button></div>
+            <form id="group-form" class="group-row"><label for="run-id">Группа</label><input id="run-id" value="manual" required maxlength="64" pattern="[A-Za-z0-9_-]{1,64}" aria-describedby="group-hint"><button class="secondary" type="submit">Показать</button></form><p id="group-hint" class="hint">Латинские буквы, цифры, дефис или подчёркивание.</p>
+            <div class="filters" role="group" aria-label="Фильтр дел"><button type="button" data-filter="all" aria-pressed="true">Все</button><button type="button" data-filter="open" aria-pressed="false">В работе</button><button type="button" data-filter="done" aria-pressed="false">Готово</button></div>
+            <ul id="task-list" aria-label="Список дел"></ul><div id="empty" class="empty"><span aria-hidden="true">✓</span><h3>Здесь пока чистый лист</h3><p>Добавьте первое дело — оно появится здесь.</p></div>
+          </section>
+          <p class="saved-note">Изменения сохраняются в базе данных.</p>
+        </div>
+      </div>
+    </section>
+    <div id="status" role="status" aria-live="polite" hidden></div>
+  </main>
+  <footer><span>По порядку · 2026</span><span>Express + PostgreSQL</span></footer>
+  <dialog id="edit-dialog"><form id="edit-form"><span class="small-label">ОДНО ДЕЛО ЗА РАЗ</span><h2>Изменить название</h2><label for="edit-title">Название дела</label><input id="edit-title" required><div class="dialog-actions"><button id="cancel-edit" class="secondary" type="button">Отмена</button><button class="primary" type="submit">Сохранить</button></div></form></dialog>
+  <dialog id="delete-dialog"><form id="delete-form"><span class="small-label">УДАЛЕНИЕ ДЕЛА</span><h2>Удалить это дело?</h2><p id="delete-title"></p><p class="muted">Отменить удаление не получится.</p><div class="dialog-actions"><button id="cancel-delete" class="secondary" type="button">Оставить</button><button class="danger" type="submit">Удалить</button></div></form></dialog>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "pepe1az-todo-final",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24 <25" },
+  "scripts": {
+    "start": "node --env-file=.env src/index.js",
+    "migrate": "node --env-file=.env src/migrate.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": { "express": "^5.1.0", "pg": "^8.16.3" }
+}

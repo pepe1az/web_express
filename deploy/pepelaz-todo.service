@@ -1,0 +1,21 @@
+[Unit]
+Description=Pepelaz final todo application
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+WorkingDirectory=/opt/pepelaz-todo
+EnvironmentFile=/etc/pepelaz-todo.env
+Environment=NODE_ENV=production
+ExecStart=/opt/node-todo/bin/node /opt/pepelaz-todo/src/index.js
+DynamicUser=yes
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
