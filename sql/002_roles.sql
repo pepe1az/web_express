@@ -13,3 +13,4 @@ GRANT USAGE ON SCHEMA public TO todo_app,todo_reviewer;
 GRANT SELECT,INSERT,UPDATE,DELETE ON tasks TO todo_app,todo_reviewer;
 ALTER ROLE todo_app SET statement_timeout='5s';
 ALTER ROLE todo_reviewer SET statement_timeout='15s';
+ALTER ROLE todo_reviewer SET idle_in_transaction_session_timeout='60s';

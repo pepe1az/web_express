@@ -1,0 +1,9 @@
+# Replace todo_example with the dedicated database name.
+# Place before existing broader host rules; retain existing local admin/app rules.
+hostssl todo_example todo_reviewer 0.0.0.0/0 scram-sha-256
+hostssl todo_example todo_reviewer ::/0 scram-sha-256
+# Optional loopback access for the existing restricted SSH tunnel.
+host todo_example todo_reviewer 127.0.0.1/32 scram-sha-256
+host all todo_reviewer 0.0.0.0/0 reject
+host all todo_reviewer ::/0 reject
+# Do not add public host rules for the application or administrative roles.

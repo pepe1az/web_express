@@ -1,0 +1,6 @@
+# Install into /etc/postgresql/16/main/conf.d/ after provisioning the certificate.
+listen_addresses = '*'
+ssl = on
+ssl_min_protocol_version = 'TLSv1.2'
+ssl_cert_file = '/etc/postgresql/16/main/tls/fullchain.pem'
+ssl_key_file = '/etc/postgresql/16/main/tls/privkey.pem'
